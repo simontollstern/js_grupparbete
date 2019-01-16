@@ -14,7 +14,7 @@ body {
 /* startsida */
 
 #introImg {
-    background-image: url("introImg.jpeg");
+    background-image: url("img/introImg.jpeg");
     width: 100%;
     height: 100%;
     background-position: center;
@@ -86,7 +86,7 @@ body {
 
 /* background */
 #background {
-    background-image: url("woods.jpg");
+    background-image: url("img/woods.jpg");
     height: 100%;
     width: 100%;
 
@@ -101,37 +101,37 @@ body {
 
 #background2,
 .landscapes {
-    background-image: url("colors4.jpg");
+    background-image: url("img/colors4.jpg");
 }
 
 #background3,
 .landscapes {
-    background-image: url("flora-flowes-green-122429.jpg");
+    background-image: url("img/flora-flowes-green-122429.jpg");
 }
 
 #background4,
 .landscapes {
-    background-image: url("abstract.jpg");
+    background-image: url("img/abstract.jpg");
 }
 
 #background5,
 .landscapes {
-    background-image: url("kaleidoscope-577317.jpg");
+    background-image: url("img/kaleidoscope-577317.jpg");
 }
 
 #background6,
 .landscapes {
-    background-image: url("game-over.jpg");
+    background-image: url("img/game-over.jpg");
 }
 
 #background7,
 .landscapes {
-    background-image: url("game-over2.png");
+    background-image: url("img/game-over2.png");
 }
 
 #background8,
 .landscapes {
-    background-image: url('won.jpg');
+    background-image: url('img/won.jpg');
 }
 
 

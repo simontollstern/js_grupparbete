@@ -1,15 +1,3 @@
-// COOKIES
-var cookies = document.cookie.split("; ");
-var cookieObjs = [];
-
-for(var cookie of cookies){
-  var objects = cookie.split("=");
-
-  cookieObjs.push({
-    [objects[0]]: objects[1]
-  });
-}
-
 /* intro */
 
 // Byter ut muspekaren till ett sikte
@@ -29,7 +17,7 @@ function maleCharacterTransform() {
     femaleChar.style.transform = 'scale(1)';
     startButton.style.display = 'block';
 
-    var maleSound = new Audio('Laugh_To_Self.mp3');
+    var maleSound = new Audio('audio/Laugh_To_Self.mp3');
     // tortureSound.play();
     var malePromise = maleSound.play()
 
@@ -45,7 +33,7 @@ function femaleCharacterTransform() {
     maleChar.style.transform = 'scale(1)';
     startButton.style.display = 'block';
 
-    var femaleSound = new Audio('femaleVoice.mp3');
+    var femaleSound = new Audio('audio/femaleVoice.mp3');
     // tortureSound.play();
 
     var femalePromise = femaleSound.play()
@@ -75,7 +63,7 @@ function gamePlay() {
                     var ammo = i;
                     bulletArray.push(ammo);
                     bulletPrint();
-                    var gunShotReloadSound = new Audio('shotgun-reload.mp3');
+                    var gunShotReloadSound = new Audio('audio/shotgun-reload.mp3');
                     gunShotReloadSound.play();
                 }
             }
@@ -105,7 +93,7 @@ function gamePlay() {
     buttonPlay = document.querySelector('.playAgainYes');
     buttonQuit = document.querySelector('.playAgainNo');
 
-    var playerName = cookieObjs[1].user;
+    var playerName = prompt('Enter your name, hunter.');
     random2dArray[0].push(playerName);
 
 
@@ -124,7 +112,7 @@ function gamePlay() {
     window.onclick = function () {
 
         bulletArray.pop();
-        var gunShotSound = new Audio('Shotgun_Blast.mp3');
+        var gunShotSound = new Audio('audio/Shotgun_Blast.mp3');
         gunShotSound.play();
 
         player.ammo();
@@ -234,7 +222,7 @@ function gamePlay() {
         scoreCounter++
         points.textContent = 'Score: ' + scoreCounter + ' / 25';
 
-        // vid 25 klicks
+        // vid 25 klicks 
         if (scoreCounter === 1) {
             alert('Congratulation you won by reaching 25 points! Your score was ' + scoreCounter + ' and you shot ' + shots + ' bullets and missed the target ' + calcMiss() + ' times.');
             clearInterval(cancel);
@@ -284,7 +272,7 @@ function gamePlay() {
 
 
             //Applause vid vinst
-            var applauseSound = new Audio('applause.mp3');
+            var applauseSound = new Audio('audio/applause.mp3');
             // tortureSound.play();
 
             var applausePromise = applauseSound.play()
@@ -318,7 +306,7 @@ function gamePlay() {
 
 
 
-    // Ligger ute för att visa texten på browsern från början när sidan laddas
+    // Ligger ute för att visa texten på browsern från början när sidan laddas    
     var secondText = document.querySelector('#second-Counter');
 
     // decrementSeconds function börjar - Life countdown
@@ -329,7 +317,7 @@ function gamePlay() {
         document.querySelector('#second-Counter').style.color = 'yellow';
         secondText.innerText = secondsCountDown;
 
-        // Om sekunder är 0 eller mindre än 0 dras ett liv,
+        // Om sekunder är 0 eller mindre än 0 dras ett liv, 
         if (secondsCountDown === 0 || secondsCountDown < 0) {
 
             player.playerLife--;
@@ -358,7 +346,7 @@ function gamePlay() {
             document.querySelector('#bonusButton').style.marginLeft = '';
 
 
-            var tortureSound = new Audio('torture.mp3');
+            var tortureSound = new Audio('audio/torture.mp3');
             var playPromise = tortureSound.play()
 
             if (playPromise !== null) {
@@ -397,7 +385,7 @@ function exitGame() {
     document.querySelector('#background7').style.display = 'block';
     document.querySelector('#background7').style.zIndex = '5';
 
-    var bloodSound = new Audio('Blood-Splatter.mp3');
+    var bloodSound = new Audio('audio/Blood-Splatter.mp3');
     // tortureSound.play();
 
     // Spelar upp ljud vid game over
@@ -471,6 +459,6 @@ function loserBonus() {
 }
 
 function nextGameFunc() {
-    location.href = "../jonas";
+    alert('Next game');
 
 }
