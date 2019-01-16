@@ -176,7 +176,7 @@ function collisionDetection() {
                     console.log(score);
                     console.log(score.length);
                     randomColor = getRandomColor();
-                    if(score == brickRowCount * brickColumnCount) {
+                    if(score.length == 10) {
                       alert("YOU WIN, CONGRATULATIONS! YOUR SCORE: " + score.length);
                       // stop funktion
                       myStopFunction(interval);
