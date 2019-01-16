@@ -1,3 +1,13 @@
+// COOKIES
+var cookies = document.cookie.split("; ");
+var cookie = {};
+
+for(var c of cookies){
+  var objects = c.split("=");
+
+  cookie[objects[0]] = objects[1];
+}
+
 /* intro */
 
 // Byter ut muspekaren till ett sikte
@@ -93,7 +103,7 @@ function gamePlay() {
     buttonPlay = document.querySelector('.playAgainYes');
     buttonQuit = document.querySelector('.playAgainNo');
 
-    var playerName = prompt('Enter your name, hunter.');
+    var playerName = cookie.user;
     random2dArray[0].push(playerName);
 
 
@@ -222,7 +232,7 @@ function gamePlay() {
         scoreCounter++
         points.textContent = 'Score: ' + scoreCounter + ' / 25';
 
-        // vid 25 klicks 
+        // vid 25 klicks
         if (scoreCounter === 1) {
             alert('Congratulation you won by reaching 25 points! Your score was ' + scoreCounter + ' and you shot ' + shots + ' bullets and missed the target ' + calcMiss() + ' times.');
             clearInterval(cancel);
@@ -306,7 +316,7 @@ function gamePlay() {
 
 
 
-    // Ligger ute för att visa texten på browsern från början när sidan laddas    
+    // Ligger ute för att visa texten på browsern från början när sidan laddas
     var secondText = document.querySelector('#second-Counter');
 
     // decrementSeconds function börjar - Life countdown
@@ -317,7 +327,7 @@ function gamePlay() {
         document.querySelector('#second-Counter').style.color = 'yellow';
         secondText.innerText = secondsCountDown;
 
-        // Om sekunder är 0 eller mindre än 0 dras ett liv, 
+        // Om sekunder är 0 eller mindre än 0 dras ett liv,
         if (secondsCountDown === 0 || secondsCountDown < 0) {
 
             player.playerLife--;
@@ -459,6 +469,6 @@ function loserBonus() {
 }
 
 function nextGameFunc() {
-    alert('Next game');
+    location.href = "../jonas";
 
 }

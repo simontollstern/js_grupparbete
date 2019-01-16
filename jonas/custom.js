@@ -1,3 +1,13 @@
+// COOKIES
+var cookies = document.cookie.split("; ");
+var cookie = {};
+
+for(var c of cookies){
+  var objects = c.split("=");
+
+  cookie[objects[0]] = objects[1];
+}
+
 //JS spel Frågor men inga svar.
 
 //globala variabler

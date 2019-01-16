@@ -28,15 +28,3 @@ extraLifeText.innerHTML = "I want an extra life!";
 container.appendChild(extraLifeText);
 
 document.cookie = `user=${user}`;
-
-// COOKIES
-var cookies = document.cookie.split("; ");
-var cookie = {};
-
-for(var c of cookies){
-  var objects = c.split("=");
-
-  cookie[objects[0]] = objects[1];
-}
-
-console.log(cookie);

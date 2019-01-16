@@ -1,13 +1,11 @@
 // COOKIES
 var cookies = document.cookie.split("; ");
-var cookieObjs = [];
+var cookie = {};
 
-for(var cookie of cookies){
-  var objects = cookie.split("=");
+for(var c of cookies){
+  var objects = c.split("=");
 
-  cookieObjs.push({
-    [objects[0]]: objects[1]
-  });
+  cookie[objects[0]] = objects[1];
 }
 
 /*******Här Börjar JavaScript Koden*************/
@@ -104,7 +102,7 @@ var date = new Date();
 var now = date.getFullYear();
 
 // Spelarens namn
-var name = cookieObjs[1].user;
+var name = cookie.user;
 
 //År spelaren är född
 var birthYear = prompt("Year you were born?");
