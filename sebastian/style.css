@@ -1,0 +1,225 @@
+/* SPELET AV SPELET BÖRJAR */
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+/* startsida */
+
+#introImg {
+    background-image: url("introImg.jpeg");
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    z-index: 5;
+}
+
+#welcomeText {
+    z-index: 5;
+    color: white;
+    font-size: 200px;
+    text-transform: uppercase;
+    margin: 0 0 0 34%;
+    padding: 0;
+}
+
+/* Characters */
+#chooseCharacterText {
+    z-index: 5;
+    color: white;
+    text-transform: uppercase;
+    font-size: 42px;
+    margin-top: 5%;
+    margin: 0 0 0 39.5%;
+    padding: 0;
+    position: absolute;
+}
+
+#maleChar {
+    width: 400px;
+    /*height: 700px;*/
+    height: 500px;
+    margin-left: 25%;
+    margin-top: 5%;
+    position: absolute;
+}
+
+#femaleChar {
+    width: 400px;
+    /*height: 700px;*/
+    height: 500px;
+    margin-left: 65%;
+    margin-top: 5%;
+    position: absolute;
+}
+
+#maleChar:hover,
+#femaleChar:hover {
+    transform: scale(1.2);
+}
+
+/* class för bakgrunderna */
+.landscapes {
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+/* background */
+#background {
+    background-image: url("woods.jpg");
+    height: 100%;
+    width: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: absolute;
+}
+
+#background2,
+.landscapes {
+    background-image: url("colors4.jpg");
+}
+
+#background3,
+.landscapes {
+    background-image: url("flora-flowes-green-122429.jpg");
+}
+
+#background4,
+.landscapes {
+    background-image: url("abstract.jpg");
+}
+
+#background5,
+.landscapes {
+    background-image: url("kaleidoscope-577317.jpg");
+}
+
+#background6,
+.landscapes {
+    background-image: url("game-over.jpg");
+}
+
+#background7,
+.landscapes {
+    background-image: url("game-over2.png");
+}
+
+#background8,
+.landscapes {
+    background-image: url('won.jpg');
+}
+
+
+
+/* Buttons */
+.buttonBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 350px;
+}
+
+.choiceButton {
+    width: 150px;
+    height: 50px;
+    background-color: black;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    color: white;
+    font-size: 22px;
+    margin-top: 200px;
+    z-index: 1;
+    display: none;
+}
+
+#play {
+    display: block;
+    margin-left: 46%;
+    margin-top: 30%;
+    width: 300px;
+}
+
+button:hover {
+    border: solid white;
+}
+
+.playAgainYes {
+    margin-right: 50px;
+}
+
+.playAgainNo {
+    margin-left: 50px;
+}
+
+/* Next game button */
+.nextGame {
+    margin-left: 50px;
+}
+
+/* raptor */
+
+#raptor {
+    width: 100px;
+    z-index: 3;
+}
+
+#raptor>img {
+    height: 100px;
+    width: 100px;
+    z-index: 2;
+
+}
+
+/* poäng */
+#scoreBox {
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+
+}
+
+#score {
+    font-size: 42px;
+    color: yellow;
+    margin-right: 200px;
+    z-index: 2;
+
+
+}
+
+/* second counter */
+#second-Counter {
+    margin-right: 200px;
+    z-index: 2;
+}
+
+/* Won text */
+#wonText {
+    position: absolute;
+    top: 300px;
+}

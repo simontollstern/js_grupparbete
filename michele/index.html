@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>BREAKOUT</title>
+
+    <style>
+* {
+padding: 0; margin: 0;
+}
+
+canvas {
+  background-image: url("pinja.jpg");
+  display: block;
+  margin: 0 auto;
+}
+
+.stars {
+  width: 100%;
+  position: absolute;
+  bottom: 500px;
+  left: 380px;
+  z-index: 5;
+}
+
+.rating {
+  width: 100%;
+  position: absolute;
+  bottom: 300px;
+  left: 170px;
+  z-index: 3;
+}
+
+.buttons{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.btn {
+  width: 200px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  margin: 5px;
+}
+
+    </style>
+
+</head>
+
+<body class="body">
+
+  <div class="rating"></div>
+  <div class="stars"></div>
+
+  <canvas id="myCanvas" width="1000" height="700"></canvas>
+
+  <div class="buttons">
+      <button type="button" class="btn" id="startGame" name="button" onclick="startGame()">Start Game</button>
+      <button type="button" class="btn" name="button" onclick="location.href = '../sebastian'">Next Game</button>
+      <button type="button" class="btn" name="button" onclick="location.reload();">Try again</button>
+  </div>
+
+<script src="js.js"></script>
+</body>
+</html>

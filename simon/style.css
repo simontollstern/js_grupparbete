@@ -1,0 +1,143 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Titillium Web', sans-serif;
+  background-color: #444;
+  color: #ddd;
+}
+
+.wrapper{
+  display: flex;
+}
+
+table{
+  box-shadow: 0 5px 10px 2px rgba(0,0,0,0.3);
+  border-collapse: collapse;
+  border: 5px solid #222;
+}
+
+tr{
+  background-color: #333;
+  display: flex;
+}
+
+td{
+  height: 24px;
+  width: 24px;
+  background-color: #222;
+  box-sizing: border-box;
+  transition: 250ms height;
+}
+
+.temp-td{
+  height: 0;
+  border: none!important;
+}
+
+.tablewrap{
+  position: relative;
+}
+
+.right{
+  position: relative;
+  height: 730px;
+  margin-left: -195px;
+  opacity: 0;
+  transition: 1000ms all;
+  z-index: -1;
+}
+
+.right-bottom{
+  position: absolute;
+  bottom: 0;
+  width: 195px;
+  overflow: hidden;
+  box-shadow: none;
+  z-index: -1;
+  transition: 1000ms all;
+}
+
+.right-bottom div{
+  border: 5px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  height: 195px;
+  position: relative;
+}
+
+.right-bottom table{
+  margin: 0;
+  box-shadow: none;
+  border: none;
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transition: 1000ms ease all;
+  background-color: rgba(0,0,0,0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px;
+}
+
+.overlay *{
+  transition: 500ms all;
+  opacity: 0;
+  text-align: center;
+}
+
+.overlay h1{
+  margin-bottom: 60px;
+}
+
+h1{
+  font-size: 80px;
+}
+
+h2{
+  font-size: 40px;
+}
+
+h3{
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  color: #aaa;
+}
+
+p{
+  font-size: 40px;
+  margin-bottom: 60px;
+  transition: 500ms ease all;
+  opacity: 0;
+}
+
+a{
+  padding: 15px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.25);
+  transition: 500ms ease all;
+  opacity: 1;
+  text-align: center;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}

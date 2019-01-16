@@ -1,0 +1,64 @@
+<!--  SPELET BÖRJAR  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chased</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+
+</head>
+
+<body>
+    <div id="background">
+
+        <div id="introImg">
+            <h1 id="welcomeText">Chased</h1>
+            <h1 id="chooseCharacterText">Choose your character</h1>
+            <img src="maleCharacter.png" id="maleChar" onclick="maleCharacterTransform()" alt="Male character">
+            <img src="femaleCharacter.png" id="femaleChar" onclick="femaleCharacterTransform()" alt="Female character">
+            <button class="choiceButton" id="play" onclick="gamePlay()">Play</button>
+        </div>
+        <img src="raptor.png" alt="A raptor" id="raptor" style="position: fixed">
+
+        <div id="scoreBox">
+            <div id="score"></div>
+            <div id="second-Counter"></div>
+            <div id="life"></div>
+            <div id="bullets"></div>
+        </div>
+    </div>
+
+    <div id="background2" class="landscapes"></div>
+    <div id="background3" class="landscapes"></div>
+    <div id="background4" class="landscapes"></div>
+    <div id="background5" class="landscapes"></div>
+    <div id="background6" class="landscapes">
+        <div class="buttonBox">
+            <button class="choiceButton playAgainYes" onclick="playAgain()">Play</button>
+            <button class="choiceButton" id="bonusButton" onclick="loserBonus()">Bonus Game</button>
+            <button class="choiceButton playAgainNo" onclick="exitGame()">Quit</button>
+            <button class="choiceButton nextGame" onclick="nextGameFunc()">Next game</button>
+
+        </div>
+    </div>
+    <div id="background7" class="landscapes"></div>
+    <div id="background8" class="landscapes">
+        <h1 id="wonText"> You won</h1>
+        <div class="buttonBox">
+            <button class="choiceButton playAgainYes" onclick="playAgain()">Play</button>
+            <button class="choiceButton playAgainNo" onclick="exitGame()">Quit</button>
+        </div>
+
+    </div>
+
+
+    <script src="javascript.js"></script>
+</body>
+
+</html>
+<!--   SPELET SLUTAR  -->
