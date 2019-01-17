@@ -1,40 +1,35 @@
-// COOKIES
+// ------------------ COOKIES ------------------ //
+// This piece of code is identical on every game but needs to be in all js files
+
+// document.cookie is a string, turn it into an array (["example=example", ..])
 var cookies = document.cookie.split("; ");
+// Create an object in which to store the cookies
 var cookie = {};
-
+// Loop through the cookies
 for(var c of cookies){
+  // Split the cookie strings and turn them into arrays (["example", "example"], ..)
   var objects = c.split("=");
-
+  // Add the first value to the cookie object as a key and the other as a value
   cookie[objects[0]] = objects[1];
+  // This means that cookies with the value "true" are strings and not booleans, but I can't be bothered to fix it
 }
 
-// Create the main array
-var grid = [];
+// --------- SOME GENERAL INFORMATION ---------- //
+// The array which keeps track of the position of things
+// is referred to as "the grid". The grid can have 3
+// values: 0 - Empty space, 1 - Occupied space and 2 -
+// the current shape.
+// The table on which the game is drawn is referred to
+// as "the table".
 
-function drawGrid(rows, columns){
-  // Fill the grid with the specified amounts of rows and columns
-  for(var i = 0; i < rows; i++){
-    grid[i] = new Array(columns).fill(0);
-  }
+// Also all the setTimeouts with 0 delay feels really
+// hacky and is only used for A E S T H E T I C S
 
-  // Create tr's in the table for every row in the grid array
-  for(var row in grid){
-    document.querySelector("table").appendChild(document.createElement("tr"));
-  }
-
-  // Create td's in the table for every column in the grid array
-  for(var row in grid){
-    for(var column in grid[row]){
-      document.querySelectorAll("tr")[row].appendChild(document.createElement("td"));
-    }
-  }
-}
-
-// Run the function
-drawGrid(30, 15);
-
-// Create an array with objects for all the possible shapes
-var shapes = [
+// -------------- GLOBAL VARIABLES ------------- //
+// The grid, explained above
+var grid = [],
+// An array with object for all the available shapes
+shapes = [
   {
     color: "hsl(0, 50%, 50%)",
     blocks: [
@@ -86,112 +81,96 @@ var shapes = [
       [1, 1, 0]
     ]
   },
-];
-
-for(var shape of shapes){
-  // Add the draw() method to all shape objects
-  shape.draw = function(){
-    for(var row in currentShape.blocks){
-      for(var block in currentShape.blocks[row]){
-        // Loop through the currentShape and create it in the grid array
-        if(currentShape.blocks[row][block] == 1){
-          grid[currentRow + Number(row)][blockPosition + Number(block)] = 2;
-        }
-        // Also, create the shape in the table and give it borders its sides
-        if(currentShape.blocks[row][block] == 1){
-          document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[blockPosition + Number(block)].style.backgroundColor = currentShape.color;
-
-          if(currentShape.blocks[row][block - 1] != 1){
-            document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[blockPosition + Number(block)].style.borderLeft = "0.5px solid #222";
-          }
-          if(currentShape.blocks[row][Number(block) + 1] != 1){
-            document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[blockPosition + Number(block)].style.borderRight = "0.5px solid #222";
-          }
-          if(row == 0 || currentShape.blocks[row - 1][block] != 1){
-            document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[blockPosition + Number(block)].style.borderTop = "0.5px solid #222";
-          }
-          if(row == currentShape.blocks.length - 1 || currentShape.blocks[Number(row) + 1][block] != 1){
-            document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[blockPosition + Number(block)].style.borderBottom = "0.5px solid #222";
-          }
-        }
-      }
-    }
-  }
-  // Add the clear() method to all shape objects
-  shape.clear = function(){
-    for(var row in currentShape.blocks){
-      for(var block in currentShape.blocks[row]){
-        switch(grid[currentRow + Number(row)][blockPosition + Number(block)]){
-          case 2:
-            grid[currentRow + Number(row)][blockPosition + Number(block)] = 0;
-            break;
-        }
-        if(currentShape.blocks[row][block] == 1){
-          document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[blockPosition + Number(block)].style.backgroundColor = "#222";
-          document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[blockPosition + Number(block)].style.border = "none";
-        }
-      }
-    }
-  }
-  shape.height = shape.blocks.length;
-}
-
-function asd(object, callback){
-  console.log(object);
-  callback();
-}
-
-function qwe(){
-  console.log("Printed object");
-}
-
-asd(shapes[0], qwe);
-
-document.querySelector(".score-container p").innerHTML = cookie.user;
-
-// ----------------- VARIABLES ----------------- //
-var randomShape,
+],
+// Becomes a random number to select a random shape
+randomShape,
+// Becomes the nextShape and is controlled by the player
 currentShape,
+// Becomes one of the available shapes
 nextShape,
+// Keeps track of the score
 score = 0,
-blockPosition = Math.floor(grid[0].length / 2),
+// Keeps track of the currentShape's horizontal position
+shapePosition,
+// Keeps track of wether a shape is active or not
 shapeActive = false,
+// Keeps track of the currentShape's vertical position
 currentRow = 0,
+// The speed at which the shapes move
 interval = 200,
+// The speed at which the shapes move while the player presses the down key
 fastInterval = 30,
+// Keep track of wether the game is running or not
 gameOver = false,
+// Same as above, kinda
 pause = true,
+// The name of the setInterval (requires a name to clearInterval)
 speed;
 
 // ----------------- FUNCTIONS ----------------- //
+function drawGrid(rows, columns){
+  // Fill the grid with the specified amounts of rows and columns
+  for(var i = 0; i < rows; i++){
+    grid[i] = new Array(columns).fill(0);
+  }
+
+  // Create tr's in the table for every row in the grid array
+  for(var row in grid){
+    document.querySelector("table").appendChild(document.createElement("tr"));
+  }
+
+  // Create td's in the table for every column in the grid array
+  for(var row in grid){
+    for(var column in grid[row]){
+      document.querySelectorAll("tr")[row].appendChild(document.createElement("td"));
+    }
+  }
+
+  // Set the spawn position for shapes to the middle of the grid
+  shapePosition = Math.floor(grid[0].length / 2)
+
+  // I don't really know where to put this, but get the user's name from the cookie and add it to the page
+  document.querySelector(".score-container p").innerHTML = cookie.user;
+}
+
 function startScreen(){
+  // Set the title in the overlay's opacity to 1 after a 0ms delay to trigger the transition
   setTimeout(function(){
     document.querySelector(".overlay h1").style.opacity = "1";
   }, 0);
+  // Set the button in overlay's opacity to 1 after 200ms
   setTimeout(function(){
     document.querySelector(".overlay a").style.opacity = "1";
   }, 200);
 
+  // Add mouseenter and mouseleave events that changes border color to the button
   document.querySelector(".overlay a").addEventListener("mouseenter", function(){
     this.style.borderColor = "red";
   });
   document.querySelector(".overlay a").addEventListener("mouseleave", function(){
     this.style.borderColor = "#ccc";
   });
+
+  // Add a click event that displays the UI and starts the game to the button
   document.querySelector(".overlay a").addEventListener("click", function(){
+    // Show UI
     document.querySelector(".right").style.opacity = "1";
     document.querySelector(".right").style.marginLeft = "60px";
     document.querySelector(".right-bottom").style.boxShadow = "0 5px 10px 2px rgba(0,0,0,0.3)";
 
+    // Hide overlay
     document.querySelector(".overlay h1").style.opacity = "0";
     setTimeout(function(){
       document.querySelector(".overlay a").style.opacity = "0";
     }, 200);
+    // After all transitions are finished
     setTimeout(function(){
+      // Remove elements from the overlay
       while(document.querySelector(".overlay").childNodes[0]){
         document.querySelector(".overlay").removeChild(document.querySelector(".overlay").childNodes[0]);
       }
 
+      // Start the game
       pause = false;
       // Set the interval at which rate the shapes move
       speed = setInterval(step, interval);
@@ -239,10 +218,9 @@ function removeFullRows(){
       // And add a new one at the top
       grid.unshift(new Array(15).fill(0));
 
+      // Brighten the colors and set some borders for the row that will be removed
       for(var block in grid[row]){
-        document.querySelectorAll("tr")[row].querySelectorAll("td")[block].style.backgroundColor = "#ccc";
-
-        document.querySelectorAll("tr")[row].querySelectorAll("td")[block].style.border = "none";
+        document.querySelectorAll("tr")[row].querySelectorAll("td")[block].style.filter = "brightness(200%)";
         document.querySelectorAll("tr")[row].querySelectorAll("td")[block].style.borderTop = "0.5px solid #222";
         document.querySelectorAll("tr")[row].querySelectorAll("td")[block].style.borderBottom = "0.5px solid #222";
 
@@ -253,6 +231,7 @@ function removeFullRows(){
          }
       }
 
+      // Pause the game for 1 second
       pause = true;
       setTimeout(function(){
         pause = false;
@@ -266,6 +245,7 @@ function removeFullRows(){
           document.querySelectorAll("tr")[0].appendChild(newBlock);
         }
 
+        // Remove the row
         document.querySelector("table").removeChild(document.querySelector("table").childNodes[row + 1]);
 
         // Decrease the interval between steps
@@ -281,11 +261,13 @@ function removeFullRows(){
     // Replace the old score in the document with the new one
     document.querySelectorAll(".score-container p")[1].innerHTML = score;
 
+    // If score requirement is exceeded, replace the red X with a green checkmark
     if(score >= 500){
       document.querySelector("span").innerHTML = "&#10004;";
       document.querySelector("span").style.color = "hsl(168, 50%, 50%)";
     }
 
+    // Return true to make sure nothing happens while the game is paused
     if(pause){
       rowsToRemove = [];
       return true;
@@ -297,7 +279,7 @@ function createShape(){
   // Set the row the shape will be drawn on to the first row
   currentRow = 0;
   // Set the column the shape will drawn on to the centremost column
-  blockPosition = Math.floor(grid[0].length / 2);
+  shapePosition = Math.floor(grid[0].length / 2);
   // Generate a number to determine which shape object to draw
   randomShape = Math.floor(Math.random() * shapes.length);
   // IF the nextShape variable doesn't a value i.e. if it is the first frame of the game
@@ -316,12 +298,12 @@ function createShape(){
   }
   // Check how many extra rows there are
   var rowsToRemove = document.getElementsByClassName('temp-tr');
-
+  // Remove extra rows
   while(rowsToRemove[0]){
     grid.shift();
     document.querySelector("table").removeChild(rowsToRemove[0]);
   }
-  for(var i = 0; i < currentShape.height - 1; i++){
+  for(var i = 0; i < currentShape.blocks.length - 1; i++){
     // Add extra rows to the array
     grid.unshift(new Array(15).fill(0));
 
@@ -338,7 +320,7 @@ function createShape(){
     }
   }
   // Draw the shape
-  currentShape.draw();
+  drawShape();
   // Keep track of when a shape is active
   shapeActive = true;
 
@@ -369,13 +351,60 @@ function createShape(){
   }
 }
 
+function drawShape(){
+  for(var row in currentShape.blocks){
+    for(var block in currentShape.blocks[row]){
+      // Loop through the currentShape and create it in the grid array
+      if(currentShape.blocks[row][block] == 1){
+        grid[currentRow + Number(row)][shapePosition + Number(block)] = 2;
+      }
+      // Also, create the shape in the table and give it borders its sides
+      if(currentShape.blocks[row][block] == 1){
+        document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[shapePosition + Number(block)].style.backgroundColor = currentShape.color;
+
+        if(currentShape.blocks[row][block - 1] != 1){
+          document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[shapePosition + Number(block)].style.borderLeft = "0.5px solid #222";
+        }
+        if(currentShape.blocks[row][Number(block) + 1] != 1){
+          document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[shapePosition + Number(block)].style.borderRight = "0.5px solid #222";
+        }
+        if(row == 0 || currentShape.blocks[row - 1][block] != 1){
+          document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[shapePosition + Number(block)].style.borderTop = "0.5px solid #222";
+        }
+        if(row == currentShape.blocks.length - 1 || currentShape.blocks[Number(row) + 1][block] != 1){
+          document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[shapePosition + Number(block)].style.borderBottom = "0.5px solid #222";
+        }
+      }
+    }
+  }
+}
+
+function clearShape(){
+  for(var row in currentShape.blocks){
+    for(var block in currentShape.blocks[row]){
+      // Loop through the grid on the blocks where the shape is
+      switch(grid[currentRow + Number(row)][shapePosition + Number(block)]){
+        case 2:
+          // Clear the blocks that contain the currentShape
+          grid[currentRow + Number(row)][shapePosition + Number(block)] = 0;
+          break;
+      }
+      // Also remove the shape from the table
+      if(currentShape.blocks[row][block] == 1){
+        document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[shapePosition + Number(block)].style.backgroundColor = "#222";
+        document.querySelectorAll("tr")[currentRow + Number(row)].querySelectorAll("td")[shapePosition + Number(block)].style.border = "none";
+      }
+    }
+  }
+}
+
 function nextStep(){
   // Remove the currentShape from the grid and table
-  currentShape.clear();
+  clearShape();
   // Move currentRow to the next row
   currentRow++;
   // Draw the currentShape on the new row
-  currentShape.draw();
+  drawShape();
 }
 
 function checkCollision(direction){
@@ -387,7 +416,7 @@ function checkCollision(direction){
 
       if(direction == "down"){
         // Check if the shape is at the bottom row OR if any of the shape's blocks has a non-active block on the next row
-        if(currentRow == grid.length - currentShape.height || currentShape.blocks[row][block] == 1 && grid[currentRow + Number(row) + 1][blockPosition + Number(block)] == 1){
+        if(currentRow == grid.length - currentShape.blocks.length || currentShape.blocks[row][block] == 1 && grid[currentRow + Number(row) + 1][shapePosition + Number(block)] == 1){
           // If it does - push true to the array
           collisionArray.push(true);
         }else{
@@ -398,7 +427,7 @@ function checkCollision(direction){
 
       if(direction == "left"){
         // Check if any of the shape's blocks has a non-active block to their left
-        if(currentShape.blocks[row][block] == 1 && grid[currentRow + Number(row)][blockPosition + Number(block) - 1] == 1){
+        if(currentShape.blocks[row][block] == 1 && grid[currentRow + Number(row)][shapePosition + Number(block) - 1] == 1){
           // If it does - push true to the array
           collisionArray.push(true);
         }else{
@@ -409,7 +438,7 @@ function checkCollision(direction){
 
       if(direction == "right"){
         // Check if any of the shape's blocks has a non-active block to their right
-        if(currentShape.blocks[row][block] == 1 && grid[currentRow + Number(row)][blockPosition + Number(block) + 1] == 1){
+        if(currentShape.blocks[row][block] == 1 && grid[currentRow + Number(row)][shapePosition + Number(block) + 1] == 1){
           // If it does - push true to the array
           collisionArray.push(true);
         }else{
@@ -428,10 +457,10 @@ function checkCollision(direction){
 }
 
 function endScreen(){
-
   // Change the background-color of the overlay
   document.querySelector(".overlay").style.backgroundColor = "rgba(0,0,0,0.75)";
 
+  // Hide the UI
   document.querySelector(".right").style.marginLeft = "-195px";
   document.querySelector(".right").style.opacity = "0";
   document.querySelector(".right-bottom").style.boxShadow = "none";
@@ -479,6 +508,7 @@ function endScreen(){
     }, 1300);
   }
 
+  // Find the amount of loops to do depending on the number of buttons
   var loops = score >= 500 || cookie.extraLife == "true" ? 2 : 1;
 
   // Loop through the new buttons and add event listeners to them
@@ -527,6 +557,7 @@ function endScreen(){
   }
 
   function nextGame(){
+    // If the extra life is used, set the cookie to false
     if(score < 500){
       document.cookie = "extraLife=false; path=/";
     }
@@ -537,6 +568,7 @@ function endScreen(){
 }
 
 // --------------- THE MAIN LOOP --------------- //
+drawGrid(30, 15);
 startScreen();
 
 function step(){
@@ -545,6 +577,7 @@ function step(){
   // Remove any full rows
   removeFullRows();
 
+  // If the game isn't paused
   if(!removeFullRows() && !pause){
     if(!shapeActive){
       // If there is no active shape, create a new one
@@ -581,24 +614,24 @@ window.addEventListener("keydown", function(e){
     if(currentShape != undefined){
       // If A or Arrow Left is pressed
       if(e.code == "KeyA" || e.code == "ArrowLeft"){
-        if(blockPosition > 0 && !checkCollision("left")){
+        if(shapePosition > 0 && !checkCollision("left")){
           // Remove the currentShape from the grid and table
-          currentShape.clear();
+          clearShape();
           // Move the currentShape one step to the left
-          blockPosition--;
+          shapePosition--;
           // Draw the currentShape on the new position
-          currentShape.draw();
+          drawShape();
         }
       }
       // If D or Arrow right is pressed
       if(e.code == "KeyD" || e.code == "ArrowRight"){
-        if(blockPosition + currentShape.blocks[0].length < grid[0].length && !checkCollision("right")){
+        if(shapePosition + currentShape.blocks[0].length < grid[0].length && !checkCollision("right")){
           // Remove the currentShape from the grid and table
-          currentShape.clear();
+          clearShape();
           // Move currentRow one step to the right
-          blockPosition++;
+          shapePosition++;
           // Draw the currentShape on the new position
-          currentShape.draw();
+          drawShape();
         }
       }
       // If W or Arrow up is pressed
@@ -607,7 +640,7 @@ window.addEventListener("keydown", function(e){
         var tempArray = [];
 
         // Remove the currentShape from the grid and table
-        currentShape.clear();
+        clearShape();
 
         // Make the temporary array the right size for the currentShape
         for(var block in currentShape.blocks[0]){
@@ -622,13 +655,13 @@ window.addEventListener("keydown", function(e){
         }
 
         // Check if the rotated shape would fit within the grid
-        if(tempArray[0].length + blockPosition <= grid[0].length && tempArray.length + currentRow <= grid.length){
+        if(tempArray[0].length + shapePosition <= grid[0].length && tempArray.length + currentRow <= grid.length){
           // Variable to store if it fits or not
           var blockFits = true;
           for(var row in tempArray){
             for(var block in tempArray[row]){
               // Check if the rotated shape would collide with something
-              if(tempArray[row][block] == 1 && grid[currentRow + Number(row)][blockPosition + Number(block)] == 1){
+              if(tempArray[row][block] == 1 && grid[currentRow + Number(row)][shapePosition + Number(block)] == 1){
                 // If it would, don't rotate it
                 blockFits = false;
               }
@@ -639,12 +672,12 @@ window.addEventListener("keydown", function(e){
             // Give the currentShape the new, rotated array
             currentShape.blocks = tempArray;
             // Set the new height of the currentShape
-            currentShape.height = currentShape.blocks.length;
+            currentShape.blocks.length = currentShape.blocks.length;
           }
         }
 
         // Draw the currentShape on the new position
-        currentShape.draw();
+        drawShape();
 
         // Reset the tempArray
         tempArray = [];
@@ -681,3 +714,37 @@ window.addEventListener("keyup", function(e){
     keyDownPressed = false;
   }
 });
+
+// ------------------- EXTRAS ------------------ //
+// The things below are not relevant to the game,
+// but they are required for this assignment
+
+// Create an object with 3 methods
+var creator = {
+  name: "Simon Tollstern",
+  print: function(){
+    console.log(this.name);
+  },
+  printUpperCase: function(){
+    console.log(this.name.toUpperCase());
+  },
+  printLowerCase: function(){
+    console.log(this.name.toLowerCase());
+  }
+}
+
+// Function that takes an object and a callback
+function printCreator(object, callback){
+  console.log(object);
+  callback();
+}
+
+// This is the callback
+function callMethods(){
+  creator.print();
+  creator.printUpperCase();
+  creator.printLowerCase();
+}
+
+// Run it
+printCreator(creator, callMethods);
