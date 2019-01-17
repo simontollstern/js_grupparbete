@@ -168,7 +168,6 @@ function collisionDetection() {
                     if(score.length >= 10){
                       document.querySelector('#nextGameButton').style.display = "block";
                     }
-
                     console.log(score.length);
                     randomColor = getRandomColor();
                     if(score.length == brickRowCount * brickColumnCount) {
@@ -216,6 +215,10 @@ function collisionDetectionTwo() {
       lives--;
       console.log(lives);
       if (lives == 0) {
+        //Kollar om extraLife finns kvar och visar isf knappen livlina 
+        if (cookie.extraLife) {
+          document.querySelector('##extraLife').style.display = "block";
+        }
         alert("GAME OVER You scored: " + score.length);
         myStopFunction(interval);
         checkScore();
