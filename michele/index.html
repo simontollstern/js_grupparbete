@@ -45,6 +45,19 @@ canvas {
   color: white;
   margin: 5px;
 }
+#nextGameButton {
+  display: none;
+}
+
+#extraLife {
+  text-align: center;
+  padding-top: 20px;
+  display: none;
+}
+
+
+
+
 
     </style>
 
@@ -59,8 +72,12 @@ canvas {
 
   <div class="buttons">
       <button type="button" class="btn" id="startGame" name="button" onclick="startGame()">Start Game</button>
-      <button type="button" class="btn" name="button" onclick="location.href = '../sebastian'">Next Game</button>
+      <button type="button" class="btn" id="nextGameButton" name="button" onclick="location.href='../sebastian'">Next Game</button>
       <button type="button" class="btn" name="button" onclick="location.reload();">Try again</button>
+      <button type="button" class="btn" id="pause" name="button" onclick="myStopFunction();">Pause</button>
+  </div>
+  <div id="extraLife">
+    <p>Want to use your extra life? If yes press Next Game button</p>
   </div>
 
 <script src="js.js"></script>
