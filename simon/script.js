@@ -8,7 +8,6 @@ for(var c of cookies){
   cookie[objects[0]] = objects[1];
 }
 
-
 // Create the main array
 var grid = [];
 
@@ -148,6 +147,8 @@ function qwe(){
 
 asd(shapes[0], qwe);
 
+document.querySelector(".score-container p").innerHTML = cookie.user;
+
 // ----------------- VARIABLES ----------------- //
 var randomShape,
 currentShape,
@@ -278,7 +279,12 @@ function removeFullRows(){
     // Increase the score by 100
     score += 100 * rowsToRemove.length;
     // Replace the old score in the document with the new one
-    document.querySelector("h2").innerHTML = score;
+    document.querySelectorAll(".score-container p")[1].innerHTML = score;
+
+    if(score >= 500){
+      document.querySelector("span").innerHTML = "&#10004;";
+      document.querySelector("span").style.color = "hsl(168, 50%, 50%)";
+    }
 
     if(pause){
       rowsToRemove = [];
@@ -437,8 +443,8 @@ function endScreen(){
   endScore.innerHTML = score;
   var restartButton = document.createElement("a");
   restartButton.innerHTML = "restart";
-  var quitButton = document.createElement("a");
-  quitButton.innerHTML = "next game";
+  var nextGameButton = document.createElement("a");
+  nextGameButton.innerHTML = "next game";
 
   var overlay = document.querySelector(".overlay");
 
@@ -446,7 +452,9 @@ function endScreen(){
   overlay.appendChild(gameoverText);
   overlay.appendChild(endScore);
   overlay.appendChild(restartButton);
-  overlay.appendChild(quitButton);
+  if(score >= 500){
+    overlay.appendChild(nextGameButton);
+  }
 
   // Change the opacity after a delay (again, to trigger the transitions)
   setTimeout(function(){
@@ -461,12 +469,16 @@ function endScreen(){
     restartButton.style.opacity = "1";
   }, 1200);
 
-  setTimeout(function(){
-    quitButton.style.opacity = "1";
-  }, 1300);
+  if(score >= 500){
+    setTimeout(function(){
+      nextGameButton.style.opacity = "1";
+    }, 1300);
+  }
+
+  var loops = score >= 500 ? 2 : 1;
 
   // Loop through the new buttons and add event listeners to them
-  for(var i = 0; i < 2; i++){
+  for(var i = 0; i < loops; i++){
     document.querySelectorAll("a")[i].addEventListener("mouseover", function(){
       this.style.borderColor = "red";
     });
@@ -479,7 +491,7 @@ function endScreen(){
         document.querySelectorAll("a")[i].addEventListener("click", restart);
         break;
       case 1:
-        document.querySelectorAll("a")[i].addEventListener("click", quit);
+        document.querySelectorAll("a")[i].addEventListener("click", nextGame);
         break;
     }
   }
@@ -497,7 +509,7 @@ function endScreen(){
     }, 200);
 
     setTimeout(function(){
-      quitButton.style.opacity = "0";
+      nextGameButton.style.opacity = "0";
     }, 300);
 
     setTimeout(function(){
@@ -510,7 +522,7 @@ function endScreen(){
     }, 1400)
   }
 
-  function quit(){
+  function nextGame(){
     // Go to the next game
     location.href = "../michele";
   }

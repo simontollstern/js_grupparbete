@@ -80,6 +80,11 @@ td{
   border: none;
 }
 
+.score-container{
+  display: flex;
+  justify-content: space-between;
+}
+
 .overlay{
   position: absolute;
   top: 0;
@@ -120,7 +125,20 @@ h3{
   color: #aaa;
 }
 
-p{
+.score-container p{
+  font-size: 24px;
+  text-transform: lowercase;
+}
+
+.right > p{
+  margin-top: 15px;
+}
+
+span{
+  color: hsl(0, 50%, 50%);
+}
+
+.overlay p{
   font-size: 40px;
   margin-bottom: 60px;
   transition: 500ms ease all;
