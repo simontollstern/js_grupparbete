@@ -11,7 +11,13 @@ for(var c of cookies){
 //JS spel Frågor men inga svar.
 
 //globala variabler
-var gameScore = 0;
+var game = {
+  score: 0,
+  a: function(){
+    alert('You won!');
+  }
+}
+
 var questionCounter = 1;
 var questionIndex = 0;
 
@@ -24,6 +30,15 @@ titleOfGame.style.textAlign = "center";
 titleOfGame.style.marginTop = "50px";
 document.body.appendChild(titleOfGame);
 document.body.insertBefore(titleOfGame, topElement);
+
+//Namn på spelare
+var name = cookie.user;
+var userName = document.createElement("p");
+userName.style.textAlign = "center";
+userName.style.marginTop = "20px";
+document.body.appendChild(userName);
+document.body.insertBefore(userName, topElement);
+userName.innerHTML = "Spelare: " + name;
 
 //Array med frågor och array metoder.
 //Skapar en tom array.
@@ -199,14 +214,16 @@ function gameEnd() {
   }
 
   //En ifsats som kollar om du har mer än 3 poäng för att avgöra om du kommer vidare eller ej.
-  if (gameScore >= 3) {
+  if (game.score >= 3) {
+
+    game.a();
     //Funktion för avslutande av spel.
     var questionTitle = document.querySelector("#questionTitle");
     questionTitle.innerHTML = "Grattis, du är nu klar med spelet";
 
     //Räknare som visar poäng från frågor.
     var firstQuestion = document.querySelector("#pQuestion");
-    firstQuestion.innerHTML = "Du fick " + gameScore + " av 5 poäng!";
+    firstQuestion.innerHTML = "Du fick " + game.score + " av 5 poäng!";
 
     //Tar bort knappar med svar.
     answer = document.querySelector("#btn1");
@@ -219,8 +236,11 @@ function gameEnd() {
     answer3.remove();
 
     answer4 = document.querySelector("#btn4");
-    answer4.innerHTML = "Next game."
+    answer4.innerHTML = "Tillbaka till startsidan.";
     answer4.style.marginTop = "0px";
+    answer4.addEventListener("click", function () {
+      location.href = "../index.html";
+    })
 
     //Ändrar CSS på rutan som frågorna stod i.
     mainWindow = document.querySelector(".question");
@@ -235,7 +255,7 @@ function gameEnd() {
 
     //Räknare som visar poäng från frågor.
     var firstQuestion = document.querySelector("#pQuestion");
-    firstQuestion.innerHTML = "Du fick " + gameScore + " av 5 poäng!";
+    firstQuestion.innerHTML = "Du fick " + game.score + " av 5 poäng!";
 
     //Tar bort knappar med svar.
     answer = document.querySelector("#btn1");
@@ -263,7 +283,7 @@ function rightAnswer() {
   //Funktion ifall man har svarat rätt på frågor.
   questionIndex++;
   questionCounter++;
-  gameScore += 1;
+  game.score += 1;
 
   //Går igenom alla knappar med en for-loop för att ta bort event lyssnare.
   for (var i = 0; i < 4; i++) {
