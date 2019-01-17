@@ -157,8 +157,8 @@ score = 0,
 blockPosition = Math.floor(grid[0].length / 2),
 shapeActive = false,
 currentRow = 0,
-interval = 300,
-fastInterval = 50,
+interval = 200,
+fastInterval = 30,
 gameOver = false,
 pause = true,
 speed;
@@ -527,7 +527,9 @@ function endScreen(){
   }
 
   function nextGame(){
-    document.cookie = "extraLife=false; path=/";
+    if(score < 500){
+      document.cookie = "extraLife=false; path=/";
+    }
 
     // Go to the next game
     location.href = "../michele";
