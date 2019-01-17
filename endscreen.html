@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>End of Game</title>
+  </head>
+
+  <style>
+
+    body{
+      background-color: black;
+    }
+
+    #wrapper{
+      height: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    #gameFinished {
+      color: white;
+      top: -50px;
+      position: absolute;
+      opacity: 1;
+      z-index: 10;
+      font-size: 70px;
+    }
+
+    #wrapperTwo {
+      height: 200px;
+      width: 50%;
+      display: flex;
+      background-color: transparent;
+      justify-content: center;
+      position: absolute;
+      left: -400px;
+      top: -1000px;
+    }
+    #wrapperThree {
+      height: 200px;
+      width: 50%;
+      display: flex;
+      background-color: transparent;
+      justify-content: center;
+      position: absolute;
+      right: -400px;
+      top: -1000px;
+    }
+    #wrapperFour {
+      height: 400px;
+      width: 50%;
+      display: flex;
+      background-color: transparent;
+      justify-content: center;
+      position: absolute;
+      left: -400px;
+      bottom: -1000px;
+    }
+    #wrapperFive {
+      height: 400px;
+      width: 50%;
+      display: flex;
+      background-color: transparent;
+      justify-content: center;
+      position: absolute;
+      right: -400px;
+      bottom: -1000px;
+    }
+    #wrapperSix {
+      height: 400px;
+      width: 100%;
+      display: flex;
+      background-color: transparent;
+      justify-content: center;
+      position: absolute;
+      bottom: -1000px;
+    }
+    #wrapperSeven {
+      height: 50px;
+      width: 100%;
+      display: flex;
+      background-color: transparent;
+      justify-content: center;
+      position: absolute;
+      bottom: -1000px;
+    }
+
+    .css {
+      color: white;
+    }
+
+    #btn {
+      background: black;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      padding-left: 50px;
+      padding-right: 50px;
+      font-size: 30px;
+    }
+
+    #btn:hover {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+
+
+
+
+  </style>
+
+
+  <body>
+
+    <div id="wrapper">
+      <h1 id="gameFinished">GAME FINISHED</h1>
+    </div>
+
+
+      <div id="wrapperTwo" class="css">
+        <h1>Simon Tollsten</h1>
+      </div>
+      <div id="wrapperThree" class="css">
+        <h1>Michele Byman</h1>
+      </div>
+
+      <div id="wrapperSix" class="css">
+        <h1>DEVELOPERS</h1>
+      </div>
+
+      <div id="wrapperFour" class="css">
+        <h1>Sebastian Persson</h1>
+      </div>
+      <div id="wrapperFive" class="css">
+        <h1>Jonas Forsberg</h1>
+      </div>
+      <div id="wrapperSeven" class="css">
+        <button type="button" id="btn" onclick="location.href = '/'">PLAY AGAIN</button>
+      </div>
+
+
+
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script>
+        $(document).ready(function() {
+
+            $('#wrapper').animate({top: 200, opacity: 0.7,},1000);
+
+            $('#wrapperTwo').animate({left: 0, top: 400, opacity: 1,},3000);
+            $('#wrapperThree').animate({right: 0, top: 400, opacity: 1,},3000);
+            $('#wrapperFour').animate({left: 0, bottom: -100, opacity: 1,},3000);
+            $('#wrapperFive').animate({right: 0, bottom: -100, opacity: 1,},3000);
+            $('#wrapperSix').animate({bottom: 100, opacity: 0.7},2000);
+            $('#wrapperSeven').animate({bottom: 50,},4000);
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+      </script>
+  </body>
+</html>
