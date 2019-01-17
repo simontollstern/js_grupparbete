@@ -66,7 +66,7 @@ function gamePlay() {
     var points;
     var playerScore;
     var player = {
-        playerLife: 4,
+        playerLife: 1,
         ammo: function () {
             if (bulletArray.length === 0) {
                 for (var i = 1; i < 7; i++) {
@@ -233,7 +233,7 @@ function gamePlay() {
         points.textContent = 'Score: ' + scoreCounter + ' / 25';
 
         // vid 25 klicks
-        if (scoreCounter === 1) {
+        if (scoreCounter === 25) {
             alert('Congratulation you won by reaching 25 points! Your score was ' + scoreCounter + ' and you shot ' + shots + ' bullets and missed the target ' + calcMiss() + ' times.');
             clearInterval(cancel);
             document.querySelector('#raptor').removeEventListener('click', imgMoving);
@@ -269,18 +269,17 @@ function gamePlay() {
             buttonQuit.style.position = 'absolute';
             buttonQuit.style.marginLeft = '48%';
             // buttonQuit.style.marginTop = '25%';
-            wonBackground.appendChild(buttonQuit);
-
-            // Go to next game
-            nextGame = document.querySelector('.nextGame');
+            wonBackground.appendChild(buttonQuit);           
+            
+            
+            nextGame = document.querySelector('#wonGoToNextGame');
             nextGame.style.display = 'block';
             nextGame.style.zIndex = '7';
             nextGame.style.position = 'absolute';
             nextGame.style.marginLeft = '59%';
             // buttonQuit.style.marginTop = '25%';
             wonBackground.appendChild(nextGame);
-
-
+            
             //Applause vid vinst
             var applauseSound = new Audio('audio/applause.mp3');
             // tortureSound.play();
@@ -298,7 +297,10 @@ function gamePlay() {
     document.querySelector('#raptor').addEventListener('click', scoreFunc);
 
 
+// Go to next game if you win
+   
 
+    
 
     //  lifeFunc function börjar - Function for life countdown
     lifeFunc = function playerLifeFunc() {
@@ -346,9 +348,10 @@ function gamePlay() {
         if (player.playerLife === 0) {
             alert('Your score was ' + scoreCounter + ', you shot ' + shots + ' bullets and missed the target ' + calcMiss() + ' times and had ' + player.playerLife + ' left.');
             clearInterval(cancel);
-            document.querySelector('#background6').style.display = 'block';
+            background6 = document.querySelector('#background6');
+            background6.style.display = 'block'
 
-            document.querySelector('#background6').style.zIndex = '4';
+            background6.style.zIndex = '4';
             document.querySelector('.playAgainYes').style.display = 'block';
             document.querySelector('.playAgainNo').style.display = 'block';
 
@@ -363,6 +366,27 @@ function gamePlay() {
                 playPromise.catch(() => { /* discard runtime error */ })
             }
 
+     
+            //function for Go to the next game if you have an extra life
+           
+            nextGame = document.querySelector('#loseExtraLife1');
+            background6.appendChild(nextGame);
+            nextGame.style.display = 'block';
+            nextGame.style.zIndex = '7';
+            nextGame.style.position = 'absolute';
+            nextGame.style.marginLeft = '46.1%';
+            nextGame.style.marginTop = '2%'
+
+            nextGame.addEventListener('click', function() {
+                
+                if (cookie.extraLife == "true") {
+                    document.cookie = "extraLife=false;path=/";
+                }
+                nextGameFunc() 
+    
+            })
+        
+                
             // Pushar in spelarens namn från en 2d array och poäng in i en vanlig array
             playerScore = scoreCounter;
             highScore.push(random2dArray[0] + ': ' + playerScore);
@@ -377,6 +401,8 @@ function gamePlay() {
 
 
 };
+
+  
 
 // refreshar sidan om man väljer play igen
 function playAgain() {

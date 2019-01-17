@@ -157,8 +157,8 @@ score = 0,
 blockPosition = Math.floor(grid[0].length / 2),
 shapeActive = false,
 currentRow = 0,
-interval = 300,
-fastInterval = 50,
+interval = 200,
+fastInterval = 30,
 gameOver = false,
 pause = true,
 speed;
@@ -444,7 +444,11 @@ function endScreen(){
   var restartButton = document.createElement("a");
   restartButton.innerHTML = "restart";
   var nextGameButton = document.createElement("a");
-  nextGameButton.innerHTML = "next game";
+  if(score >= 500){
+    nextGameButton.innerHTML = "next game";
+  }else if(cookie.extraLife == "true"){
+    nextGameButton.innerHTML = "use your extra life";
+  }
 
   var overlay = document.querySelector(".overlay");
 
@@ -452,7 +456,7 @@ function endScreen(){
   overlay.appendChild(gameoverText);
   overlay.appendChild(endScore);
   overlay.appendChild(restartButton);
-  if(score >= 500){
+  if(score >= 500 || cookie.extraLife == "true"){
     overlay.appendChild(nextGameButton);
   }
 
@@ -469,13 +473,13 @@ function endScreen(){
     restartButton.style.opacity = "1";
   }, 1200);
 
-  if(score >= 500){
+  if(score >= 500 || cookie.extraLife == "true"){
     setTimeout(function(){
       nextGameButton.style.opacity = "1";
     }, 1300);
   }
 
-  var loops = score >= 500 ? 2 : 1;
+  var loops = score >= 500 || cookie.extraLife == "true" ? 2 : 1;
 
   // Loop through the new buttons and add event listeners to them
   for(var i = 0; i < loops; i++){
@@ -523,6 +527,10 @@ function endScreen(){
   }
 
   function nextGame(){
+    if(score < 500){
+      document.cookie = "extraLife=false; path=/";
+    }
+
     // Go to the next game
     location.href = "../michele";
   }
