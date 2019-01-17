@@ -1,6 +1,4 @@
 /*******Här Börjar JavaScript Koden*************/
-$(document).ready(function() {
-
 
 // COOKIES
 var cookies = document.cookie.split("; ");
@@ -22,12 +20,12 @@ function init() {
   drawBricks();
   drawBall();
   drawPaddle.writePaddle();
-  drawText.writeScore();
   drawlives.writelives();
   collisionDetection();
   collisionDetectionTwo();
   controller();
   ballSpeed();
+  drawText.writeScore();
 }
 
 /************************Kod-forsätter*******************************/
@@ -104,7 +102,7 @@ var date = new Date();
 var now = date.getFullYear();
 
 // Spelarens namn
-var name = prompt("Player type your name");
+var name = cookie.user;
 
 //År spelaren är född
 var birthYear = prompt("Year you were born?");
@@ -176,14 +174,14 @@ function collisionDetection() {
                     dy = -dy;
                     b.status = 0;
                     score.push("bricks");
-                    // visar en knapp för att kunna gå vidare till nästa spel
-                    if(score.length >= 10){
-                      document.querySelector('#nextGameButton').style.display = "block";
-                    }
                     console.log(score.length);
                     randomColor = getRandomColor();
-                    if(score.length == brickRowCount * brickColumnCount) {
+                    // if(score.length == brickRowCount * brickColumnCount) {
+                    // endast under testversionen och redovisning annars den ovanför
+                    if(score.length == 10) {
                       alert("YOU WIN, CONGRATULATIONS! YOUR SCORE: " + score.length);
+                      // visar en knapp för att kunna gå vidare till nästa spel
+                      document.querySelector('#nextGameButton').style.display = "block";
                       // stop funktion
                       myStopFunction(interval);
                       checkScore();
@@ -201,7 +199,9 @@ function collisionDetection() {
             }
         }
     }
+
 }
+
 
 function collisionDetectionTwo() {
   // kollar om bollen nuddar kanterna och ändrar riktning
@@ -228,8 +228,9 @@ function collisionDetectionTwo() {
       console.log(lives);
       if (lives == 0) {
         //Kollar om extraLife finns kvar och visar isf knappen livlina
-        if (cookie.extraLife) {
-          document.querySelector('##extraLife').style.display = "block";
+        if (cookie.extraLife == "true") {
+          document.querySelector('#extraLife').style.display = "block";
+          document.querySelector('#nextGameButton').style.display = "block";
         }
         alert("GAME OVER You scored: " + score.length);
         myStopFunction(interval);
@@ -270,6 +271,14 @@ function ballSpeed() {
 /******funktioner som kallas av init avlsutas här********/
 
 /************Övriga funktioner**********************/
+
+
+function checkCookie() {
+  if (score.length < 10) {
+    document.cookie = "extraLife=false; path=/";
+  }
+  location.href = "../sebastian";
+}
 
 /*Funktion med switch sats som kollar rating från spelaren som sedan kallar på två andra funktioner som skriver ut meddelande + bilder.*/
 function rateGame(rate) {
@@ -519,6 +528,3 @@ for(var c = 0; c < brickColumnCount; c++) {
 
 //sätter en färg på paddeln så den inte ändras var tionde millisekund.
 drawPaddle.findColor();
-
-/*******************Variabel som innehåller funktion***********/
-});
