@@ -10,14 +10,37 @@ for(var c of cookies){
 
 //JS spel Frågor men inga svar.
 
-//globala variabler
+//Objekt för vinst meddelande och poäng.
 var game = {
   score: 0,
-  a: function(){
+  winAlert: function(){
     alert('You won!');
+  },
+  lostAlert: function(){
+    alert('You lost!');
+  },
+  myAge: function() {
+    return 2018-1994;
+  },
+  productionYear: function() {
+    return 2018;
   }
 }
 
+
+
+//Loggar ur mitt namn som developer för spelet.
+var developer = [
+  [{
+    developer: "Jonas Forsberg",
+  }]
+];
+console.log(developer);
+
+developer.push(game.myAge());
+developer.push(game.productionYear());
+
+//globala variabler
 var questionCounter = 1;
 var questionIndex = 0;
 
@@ -216,7 +239,8 @@ function gameEnd() {
   //En ifsats som kollar om du har mer än 3 poäng för att avgöra om du kommer vidare eller ej.
   if (game.score >= 3) {
 
-    game.a();
+    //Alert för vinst.
+    game.winAlert();
     //Funktion för avslutande av spel.
     var questionTitle = document.querySelector("#questionTitle");
     questionTitle.innerHTML = "Grattis, du är nu klar med spelet";
@@ -249,6 +273,8 @@ function gameEnd() {
 
   } else {
 
+    //Alert för förlust.
+    game.lostAlert();
     //Funktion för avslutande av spel.
     var questionTitle = document.querySelector("#questionTitle");
     questionTitle.innerHTML = "Tyvärr, du fick under 3 poäng.";
