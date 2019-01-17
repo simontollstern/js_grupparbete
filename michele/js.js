@@ -277,6 +277,7 @@ function checkCookie() {
   if (score.length < 10) {
     document.cookie = "extraLife=false; path=/";
   }
+  location.href = "../sebastian";
 }
 
 /*Funktion med switch sats som kollar rating från spelaren som sedan kallar på två andra funktioner som skriver ut meddelande + bilder.*/
