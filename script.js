@@ -12,9 +12,9 @@ document.body.insertBefore(startGame, container);
 
 startGame.addEventListener("click", function(){
   if(extraLife.checked == true){
-    document.cookie = "extraLife=true";
+    document.cookie = "extraLife=true; path=/";
   }else{
-    document.cookie = "extraLife=false";
+    document.cookie = "extraLife=false; path=/";
   }
   location.href = "simon";
 });
@@ -27,4 +27,4 @@ var extraLifeText = document.createElement("p");
 extraLifeText.innerHTML = "I want an extra life!";
 container.appendChild(extraLifeText);
 
-document.cookie = `user=${user}`;
+document.cookie = `user=${user}; path=/`;

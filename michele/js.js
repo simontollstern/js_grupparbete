@@ -1,3 +1,7 @@
+/*******Här Börjar JavaScript Koden*************/
+$(document).ready(function() {
+
+
 // COOKIES
 var cookies = document.cookie.split("; ");
 var cookie = {};
@@ -7,8 +11,6 @@ for(var c of cookies){
 
   cookie[objects[0]] = objects[1];
 }
-
-/*******Här Börjar JavaScript Koden*************/
 
 /*********************
 * Här är funktionen som startar spelet
@@ -102,7 +104,7 @@ var date = new Date();
 var now = date.getFullYear();
 
 // Spelarens namn
-var name = cookie.user;
+var name = prompt("Player type your name");
 
 //År spelaren är född
 var birthYear = prompt("Year you were born?");
@@ -113,6 +115,9 @@ var innerStyle;
 // ger användaren möjlighet att välj antal liv
 var checkLives = prompt("How many lives do you want to start with? (1-3)");
 console.log(checkLives);
+
+// en global variable för hur sidan ska uppdateras
+var interval;
 
 /*****************************Globala VARIABLER SLUTAR HÄR*******************/
 
@@ -171,10 +176,13 @@ function collisionDetection() {
                     dy = -dy;
                     b.status = 0;
                     score.push("bricks");
-                    console.log(score);
+                    // visar en knapp för att kunna gå vidare till nästa spel
+                    if(score.length >= 10){
+                      document.querySelector('#nextGameButton').style.display = "block";
+                    }
                     console.log(score.length);
                     randomColor = getRandomColor();
-                    if(score.length == 10) {
+                    if(score.length == brickRowCount * brickColumnCount) {
                       alert("YOU WIN, CONGRATULATIONS! YOUR SCORE: " + score.length);
                       // stop funktion
                       myStopFunction(interval);
@@ -219,6 +227,10 @@ function collisionDetectionTwo() {
       lives--;
       console.log(lives);
       if (lives == 0) {
+        //Kollar om extraLife finns kvar och visar isf knappen livlina
+        if (cookie.extraLife) {
+          document.querySelector('##extraLife').style.display = "block";
+        }
         alert("GAME OVER You scored: " + score.length);
         myStopFunction(interval);
         checkScore();
@@ -382,6 +394,20 @@ function checkScore() {
   });
 }
 
+// Funktioner för att starta spelet och pausa
+function startGame(){
+  interval = setInterval(init, 10);
+  document.querySelector("#startGame").setAttribute("disabled", "disabled");
+  document.querySelector('#pause').removeEventListener("click",startGame);
+  document.querySelector('#pause').addEventListener("click",myStopFunction);
+}
+function myStopFunction() {
+  clearInterval(interval);
+  document.querySelector('#pause').removeEventListener("click",myStopFunction);
+  document.querySelector('#pause').addEventListener("click",startGame);
+}
+
+
 
 /********************************FUNKTIONER SLUTAR HÄR*********************/
 
@@ -495,8 +521,4 @@ for(var c = 0; c < brickColumnCount; c++) {
 drawPaddle.findColor();
 
 /*******************Variabel som innehåller funktion***********/
-var interval;
-function startGame(){
-  interval = setInterval(init, 10);
-  document.querySelector("#startGame").setAttribute("disabled", "disabled");
-}
+});
