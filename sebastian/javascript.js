@@ -66,7 +66,7 @@ function gamePlay() {
     var points;
     var playerScore;
     var player = {
-        playerLife: 1,
+        playerLife: 4,
         ammo: function () {
             if (bulletArray.length === 0) {
                 for (var i = 1; i < 7; i++) {
@@ -107,7 +107,7 @@ function gamePlay() {
     random2dArray[0].push(playerName);
 
 
-    var playerLastName = prompt('Enter your lastname, hunter.');
+    var playerLastName = prompt('Enter your nickname, hunter.');
     random2dArray[1].push(playerLastName);
     alert('Good luck ' + random2dArray[0] + ' ' + random2dArray[1] + ' here is your gun.');
 
@@ -381,9 +381,8 @@ function gamePlay() {
                 
                 if (cookie.extraLife == "true") {
                     document.cookie = "extraLife=false;path=/";
-                }
-                nextGameFunc() 
-    
+                    nextGameFunc();
+                }    
             })
         
                 
