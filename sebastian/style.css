@@ -29,7 +29,7 @@ body {
     color: white;
     font-size: 200px;
     text-transform: uppercase;
-    margin: 0 0 0 34%;
+    margin: 0 0 0 27%;
     padding: 0;
 }
 
@@ -40,7 +40,7 @@ body {
     text-transform: uppercase;
     font-size: 42px;
     margin-top: 5%;
-    margin: 0 0 0 39.5%;
+    margin: 0 0 0 33.5%;
     padding: 0;
     position: absolute;
 }
@@ -49,7 +49,7 @@ body {
     width: 400px;
     /*height: 700px;*/
     height: 500px;
-    margin-left: 25%;
+    margin-left: 15%;
     margin-top: 5%;
     position: absolute;
 }
@@ -159,7 +159,7 @@ body {
 
 #play {
     display: block;
-    margin-left: 46%;
+    margin-left: 41.9%;
     margin-top: 30%;
     width: 300px;
 }
@@ -180,6 +180,7 @@ button:hover {
 .nextGame {
     margin-left: 50px;
 }
+
 
 /* raptor */
 
