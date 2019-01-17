@@ -239,7 +239,7 @@ function gameEnd() {
     answer4.innerHTML = "Tillbaka till startsidan.";
     answer4.style.marginTop = "0px";
     answer4.addEventListener("click", function () {
-      location.href = "../index.html";
+      location.href = "../";
     })
 
     //Ändrar CSS på rutan som frågorna stod i.
