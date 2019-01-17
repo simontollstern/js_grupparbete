@@ -1,4 +1,16 @@
 /*******Här Börjar JavaScript Koden*************/
+$(document).ready(function() {
+
+
+// COOKIES
+var cookies = document.cookie.split("; ");
+var cookie = {};
+
+for(var c of cookies){
+  var objects = c.split("=");
+
+  cookie[objects[0]] = objects[1];
+}
 
 /*********************
 * Här är funktionen som startar spelet
@@ -215,7 +227,7 @@ function collisionDetectionTwo() {
       lives--;
       console.log(lives);
       if (lives == 0) {
-        //Kollar om extraLife finns kvar och visar isf knappen livlina 
+        //Kollar om extraLife finns kvar och visar isf knappen livlina
         if (cookie.extraLife) {
           document.querySelector('##extraLife').style.display = "block";
         }
@@ -509,3 +521,4 @@ for(var c = 0; c < brickColumnCount; c++) {
 drawPaddle.findColor();
 
 /*******************Variabel som innehåller funktion***********/
+});
