@@ -260,7 +260,7 @@ function gameEnd() {
     answer3.remove();
 
     answer4 = document.querySelector("#btn4");
-    answer4.innerHTML = "Tillbaka till startsidan.";
+    answer4.innerHTML = "Till slutsidan.";
     answer4.style.marginTop = "0px";
     answer4.addEventListener("click", function () {
       location.href = "../";
@@ -293,9 +293,22 @@ function gameEnd() {
     answer3 = document.querySelector("#btn3");
     answer3.remove();
 
-    answer4 = document.querySelector("#btn4");
-    answer4.innerHTML = "Restart game."
-    answer4.style.marginTop = "0px";
+    if (cookie.extraLife == "true") {
+      answer4 = document.querySelector("#btn4");
+      answer4.innerHTML = "Hoppa över med extra liv.";
+      answer4.style.marginTop = "0px";
+      answer4.addEventListener("click", function() {
+        document.cookie = "extraLife=false; path=/";
+        location.href = "../endscreen.html";
+      })
+    } else {
+      answer4 = document.querySelector("#btn4");
+      answer4.innerHTML = "Försök igen.";
+      answer4.style.marginTop = "0px";
+      answer4.addEventListener("click", function() {
+        location.reload();
+      })
+    }
 
     //Ändrar CSS på rutan som frågorna stod i.
     mainWindow = document.querySelector(".question");
