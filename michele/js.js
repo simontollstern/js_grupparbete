@@ -230,6 +230,7 @@ function collisionDetectionTwo() {
         //Kollar om extraLife finns kvar och visar isf knappen livlina
         if (cookie.extraLife == "true") {
           document.querySelector('#extraLife').style.display = "block";
+          document.querySelector('#nextGameButton').style.display = "block";
         }
         alert("GAME OVER You scored: " + score.length);
         myStopFunction(interval);
