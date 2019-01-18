@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: 'Quicksand', sans-serif;
 }
 
 body {
@@ -11,6 +12,7 @@ button {
   height: 50px;
   width: 100%;
   margin-top: 10px;
+  font-size: 1.1rem;
 }
 
 .maincontent {
@@ -34,6 +36,7 @@ button {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-size: 1.1rem;
 }
 
 .answers {
