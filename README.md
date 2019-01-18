@@ -1,5 +1,5 @@
 # js_grupparbete
 
-Cookies implementerade av Simon
-Startsidan skapad av Simon
+Cookies implementerade av Simon<br>
+Startsidan skapad av Simon<br>
 endscreen.html skapad av Michele
