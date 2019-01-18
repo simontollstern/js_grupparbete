@@ -262,7 +262,7 @@ function removeFullRows(){
     document.querySelectorAll(".score-container p")[1].innerHTML = score;
 
     // If score requirement is exceeded, replace the red X with a green checkmark
-    if(score >= 500){
+    if(score >= 300){
       document.querySelector("span").innerHTML = "&#10004;";
       document.querySelector("span").style.color = "hsl(168, 50%, 50%)";
     }
@@ -473,7 +473,7 @@ function endScreen(){
   var restartButton = document.createElement("a");
   restartButton.innerHTML = "restart";
   var nextGameButton = document.createElement("a");
-  if(score >= 500){
+  if(score >= 300){
     nextGameButton.innerHTML = "next game";
   }else if(cookie.extraLife == "true"){
     nextGameButton.innerHTML = "use your extra life";
@@ -485,7 +485,7 @@ function endScreen(){
   overlay.appendChild(gameoverText);
   overlay.appendChild(endScore);
   overlay.appendChild(restartButton);
-  if(score >= 500 || cookie.extraLife == "true"){
+  if(score >= 300 || cookie.extraLife == "true"){
     overlay.appendChild(nextGameButton);
   }
 
@@ -502,14 +502,14 @@ function endScreen(){
     restartButton.style.opacity = "1";
   }, 1200);
 
-  if(score >= 500 || cookie.extraLife == "true"){
+  if(score >= 300 || cookie.extraLife == "true"){
     setTimeout(function(){
       nextGameButton.style.opacity = "1";
     }, 1300);
   }
 
   // Find the amount of loops to do depending on the number of buttons
-  var loops = score >= 500 || cookie.extraLife == "true" ? 2 : 1;
+  var loops = score >= 300 || cookie.extraLife == "true" ? 2 : 1;
 
   // Loop through the new buttons and add event listeners to them
   for(var i = 0; i < loops; i++){
@@ -558,7 +558,7 @@ function endScreen(){
 
   function nextGame(){
     // If the extra life is used, set the cookie to false
-    if(score < 500){
+    if(score < 300){
       document.cookie = "extraLife=false; path=/";
     }
 
