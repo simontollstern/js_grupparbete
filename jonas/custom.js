@@ -81,7 +81,7 @@ questions[4] = "Hur många frågor har du svarat på?";
 var answersArray = [
   ["En frukt", "En bil-modell", "En telefon", "Ett programmerings språk"],
   ["Röd", "Grön", "Gul", "Blå"],
-  ["11", "2", "'1' '1'", "'2'"],
+  ["'11'", "2", "'1' '1'", "'2'"],
   ["Jonas", "Richard", "Nordin", "Forsberg"],
   ["6", "5", "4", "7"]
 ]
@@ -309,7 +309,7 @@ function gameEnd() {
     } else {
       answer3 = document.querySelector("#btn3");
       answer3.remove();
-      
+
       answer4 = document.querySelector("#btn4");
       answer4.innerHTML = "Försök igen.";
       answer4.style.marginTop = "0px";
